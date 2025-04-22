@@ -1,32 +1,30 @@
 steps:
-  # Build and push backend image
+  # ---------- Backend ----------
   - name: 'gcr.io/cloud-builders/docker'
-    dir: backend
+    dir: 'flask_backend'
     args: ['build', '-t', 'gcr.io/$PROJECT_ID/backend', '.']
 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/backend']
 
-  # Deploy to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     args: ['gcloud', 'run', 'deploy', 'backend',
-           '--image', 'gcr.io/$PROJECT_ID/backend',
-           '--platform', 'managed',
-           '--region', 'us-central1',
+           '--image=gcr.io/$PROJECT_ID/backend',
+           '--platform=managed',
+           '--region=us-central1',
            '--allow-unauthenticated']
 
-  # Build and push frontend image
+  # ---------- Frontend ----------
   - name: 'gcr.io/cloud-builders/docker'
-    dir: frontend
+    dir: 'react_frontend'
     args: ['build', '-t', 'gcr.io/$PROJECT_ID/frontend', '.']
 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/frontend']
 
-  # Deploy frontend to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     args: ['gcloud', 'run', 'deploy', 'frontend',
-           '--image', 'gcr.io/$PROJECT_ID/frontend',
-           '--platform', 'managed',
-           '--region', 'us-central1',
+           '--image=gcr.io/$PROJECT_ID/frontend',
+           '--platform=managed',
+           '--region=us-central1',
            '--allow-unauthenticated']
