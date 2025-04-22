@@ -1,0 +1,14 @@
+apiVersion: cloudbuild.googleapis.com/v1
+kind: BuildTrigger
+metadata:
+  name: deploy-forecasting
+description: Trigger to build and deploy Flask + React
+github:
+  owner: DSP25SCM94B
+  name: github_repo_forecasting
+  push:
+    branch: '^main$'
+build:
+  filename: cloudbuild.yaml
+serviceAccount: 479709644700-compute@developer.gserviceaccount.com
+buildLogBucket: gs://github-repo-forecasting-cloudbuild-logs

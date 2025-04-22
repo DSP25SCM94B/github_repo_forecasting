@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-const API_BASE = "http://localhost:5000";
+const API_BASE = "https://flask-backend-479709644700.us-central1.run.app";
 
 const App = () => {
-  const [folders] = useState(["Visualizations", "Prophet", "ARIMA", "Tensorflow"]);
+  const [folders] = useState(["Visualizations", "prophet", "ARIMA", "tensorflow"]);
   const [selectedFolder, setSelectedFolder] = useState("Visualizations");
   const [files, setFiles] = useState([]);
   const [selectedFile, setSelectedFile] = useState("");
